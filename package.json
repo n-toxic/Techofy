@@ -1,0 +1,9 @@
+{
+  "name": "techofy-cloud-monorepo",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared/*"
+  ]
+}
