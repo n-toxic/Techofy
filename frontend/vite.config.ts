@@ -12,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+      // Yeh shared path hai
       "@workspace/api-client-react": path.resolve(__dirname, "../shared/api-client/src/index.ts"),
     },
     dedupe: ["react", "react-dom"],
@@ -34,6 +35,13 @@ export default defineConfig({
   server: {
     port: 3000,
     host: "0.0.0.0",
+    fs: {
+      /* 🛠️ BOHOT ZAROORI: Vite ko frontend folder ke bahar (shared) 
+         dekhne ki permission do */
+      allow: [
+        path.resolve(__dirname, ".."), // Isse poora monorepo root allow ho jayega
+      ],
+    },
     proxy: {
       "/api": {
         target: process.env.VITE_API_URL ?? "http://localhost:5000",
