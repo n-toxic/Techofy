@@ -194,7 +194,6 @@ router.post("/instances/:instanceId/reboot", requireAuth, async (req, res): Prom
   res.json({ message: "Instance is rebooting" });
 });
 
-
 router.get("/instances/:instanceId/credentials", requireAuth, async (req, res): Promise<void> => {
   const instanceId = parseInt(Array.isArray(req.params.instanceId) ? req.params.instanceId[0] : req.params.instanceId);
   const [instance] = await db
@@ -224,7 +223,15 @@ router.post("/instances/:instanceId/ports", requireAuth, async (req, res): Promi
   if (!instance) { res.status(404).json({ error: "Instance not found" }); return; }
   const parsed = AddInstancePortBody.safeParse(req.body);
   if (!parsed.success) { res.status(400).json({ error: parsed.error.message }); return; }
-  const [rule] = await db.insert(portRulesTable).values({ instanceId, ...parsed.data }).returning();
+  // FIX: explicitly pass fields so TypeScript knows `port` is definitely present
+  const portData = parsed.data;
+  const [rule] = await db.insert(portRulesTable).values({
+    instanceId,
+    port: portData.port,
+    protocol: portData.protocol ?? "TCP",
+    description: portData.description,
+    direction: portData.direction ?? "INBOUND",
+  }).returning();
   res.json({ id: String(rule.id), port: rule.port, protocol: rule.protocol, description: rule.description ?? "", direction: rule.direction });
 });
 
@@ -249,3 +256,4 @@ router.get("/plans", async (_req, res): Promise<void> => {
 });
 
 export default router;
+                                                                                                                                           
