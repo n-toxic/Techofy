@@ -1,9 +1,23 @@
 {
   "name": "techofy-cloud-monorepo",
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
     "frontend",
     "backend",
     "shared/*"
-  ]
+  ],
+  "scripts": {
+    "install-all": "npm install --legacy-peer-deps",
+    "frontend:dev": "npm run dev -w frontend",
+    "backend:dev": "npm run dev -w backend",
+    "build:frontend": "cd frontend && npm install --legacy-peer-deps && npm run build",
+    "build:backend": "cd backend && npm install --legacy-peer-deps"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "overrides": {
+    "esbuild": "0.25.0"
+  }
 }
