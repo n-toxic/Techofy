@@ -8,14 +8,24 @@
     "shared/*"
   ],
   "scripts": {
-    "install-all": "npm install --legacy-peer-deps",
-    "frontend:dev": "npm run dev -w frontend",
-    "backend:dev": "npm run dev -w backend",
-    "build:frontend": "cd frontend && npm install --legacy-peer-deps && npm run build",
-    "build:backend": "cd backend && npm install --legacy-peer-deps"
+    "install:all": "npm install --legacy-peer-deps",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "deploy": "npm run build:frontend && npm run build:backend"
+  },
+  "dependencies": {
+    "drizzle-zod": "^0.7.0",
+    "drizzle-orm": "^0.43.0",
+    "zod": "^3.24.2",
+    "pg": "^8.16.0",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3",
+    "esbuild": "0.25.0",
+    "esbuild-plugin-pino": "^2.3.3",
+    "tsx": "^4.19.4"
   },
   "overrides": {
     "esbuild": "0.25.0"
