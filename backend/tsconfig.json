@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "paths": {
+      "@workspace/db": ["../shared/db/src/index.ts"],
+      "@workspace/api-zod": ["../shared/api-zod/src/index.ts"]
+    }
+  },
+  "include": ["src", "../shared/db/src", "../shared/api-zod/src"]
+}
