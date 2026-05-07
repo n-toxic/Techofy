@@ -11,12 +11,6 @@
       "routePrefix": "/api"
     }
   },
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/:path*",
@@ -28,3 +22,4 @@
     }
   ]
 }
+
