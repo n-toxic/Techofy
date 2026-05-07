@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth";
 import { setAuthTokenGetter } from "@workspace/api-client-react";
+import { Analytics } from "@vercel/analytics/react";
 
 import Home from "@/pages/home";
 import About from "@/pages/about";
@@ -140,6 +141,7 @@ function App() {
             <Router />
           </WouterRouter>
           <Toaster />
+          <Analytics />
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
