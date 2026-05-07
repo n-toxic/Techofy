@@ -1,0 +1,40 @@
+# Environment variables - NEVER commit these
+.env
+.env.local
+.env.production
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+*/dist/
+build/
+*/build/
+
+# Logs
+*.log
+logs/
+pino.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Cache
+.cache/
+*.tsbuildinfo
+
+# Replit specific (remove these from your project)
+.replit
+replit.md
+.replit-artifact/
+.agents/
