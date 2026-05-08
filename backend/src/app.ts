@@ -12,19 +12,24 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
+// CORS - allow vercel.app, edev.fun, and localhost
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || origin.endsWith("edev.fun")) {
+    if (
+      !origin ||
+      origin.endsWith(".vercel.app") ||
+      origin.endsWith("edev.fun") ||
+      origin.includes("localhost") ||
+      origin.includes("127.0.0.1")
+    ) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed"));
+      callback(null, false);
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
-
-
 
 app.use(pinoHttp({
   logger,
