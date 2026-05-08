@@ -1,4 +1,5 @@
 import React from "react";
+import React from "react";
 import { Switch, Route, Router as WouterRouter, useLocation, Redirect } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -28,6 +29,7 @@ import AdminInstances from "@/pages/admin/instances";
 import AdminServerPool from "@/pages/admin/server-pool";
 import AdminTickets from "@/pages/admin/tickets";
 import NotFound from "@/pages/not-found";
+import AdminLogin from "@/pages/admin-login";
 
 try {
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
@@ -126,6 +128,7 @@ function Router() {
         {() => <ProtectedRoute component={AdminTickets} adminOnly />}
       </Route>
 
+      <Route path="/admin-login" component={AdminLogin} />
       <Route component={NotFound} />
     </Switch>
   );
