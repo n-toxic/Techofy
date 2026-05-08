@@ -27,6 +27,7 @@ import AdminUsers from "@/pages/admin/users";
 import AdminInstances from "@/pages/admin/instances";
 import AdminServerPool from "@/pages/admin/server-pool";
 import AdminTickets from "@/pages/admin/tickets";
+import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 
 try {
