@@ -41,12 +41,16 @@ export async function sendOtpEmail(email: string, code: string, name: string): P
       <span style="font-size:40px;font-weight:800;letter-spacing:12px;color:#111">${code}</span>
     </div>
     <p style="color:#6b7280;font-size:13px;margin:0">⏰ This code expires in <strong>10 minutes</strong>. Do not share it with anyone.</p>`;
-  await transporter.sendMail({
-    from: FROM,
-    to: email,
-    subject: `${code} — Your Techofy Cloud Verification Code`,
-    html: emailTemplate("Verify Your Account", greeting, body),
-  });
+  try {
+    await transporter.sendMail({
+      from: FROM,
+      to: email,
+      subject: `${code} — Your Techofy Cloud Verification Code`,
+      html: emailTemplate("Verify Your Account", greeting, body),
+    });
+  } catch (err) {
+    logger.warn({ err, email }, "Failed to send OTP email — continuing anyway");
+  }
 }
 
 export async function sendPasswordResetEmail(email: string, code: string, name: string): Promise<void> {
@@ -58,10 +62,14 @@ export async function sendPasswordResetEmail(email: string, code: string, name: 
       <span style="font-size:40px;font-weight:800;letter-spacing:12px;color:#111">${code}</span>
     </div>
     <p style="color:#6b7280;font-size:13px;margin:0">⏰ This code expires in <strong>15 minutes</strong>. If you did not request this, please ignore this email — your account is safe.</p>`;
-  await transporter.sendMail({
-    from: FROM,
-    to: email,
-    subject: `${code} — Techofy Cloud Password Reset`,
-    html: emailTemplate("Reset Your Password", greeting, body),
-  });
+  try {
+    await transporter.sendMail({
+      from: FROM,
+      to: email,
+      subject: `${code} — Techofy Cloud Password Reset`,
+      html: emailTemplate("Reset Your Password", greeting, body),
+    });
+  } catch (err) {
+    logger.warn({ err, email }, "Failed to send reset email — continuing anyway");
+  }
 }
