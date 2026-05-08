@@ -2,23 +2,33 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Frontend dependencies install
+# 1. Sabhi package.json files copy karo (taaki caching achhi mile)
 COPY frontend/package.json ./frontend/
+COPY shared/api-client/package.json ./shared/api-client/
+COPY shared/api-zod/package.json ./shared/api-zod/
+COPY shared/db/package.json ./shared/db/
+
+# 2. Shared dependencies install karo
+RUN cd shared/api-client && npm install
+RUN cd shared/api-zod && npm install
+RUN cd shared/db && npm install
+
+# 3. Frontend dependencies install karo
 RUN cd frontend && npm install --legacy-peer-deps
 
-# Source copy karo
+# 4. Ab saara source code copy karo
+COPY shared/ ./shared/
 COPY frontend/ ./frontend/
 
-# Build karo
+# 5. Build frontend
 RUN cd frontend && npm run build
 
-# Production stage - nginx se serve karo
+# --- Production Stage (Nginx) ---
 FROM nginx:alpine
 
-# Built files copy karo
 COPY --from=builder /app/frontend/dist /usr/share/nginx/html
 
-# React Router ke liye nginx config (all routes index.html pe)
+# Nginx configuration for React/Vite Router
 RUN echo 'server { \
   listen 80; \
   root /usr/share/nginx/html; \
