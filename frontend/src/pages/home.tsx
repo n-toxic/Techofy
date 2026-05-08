@@ -33,6 +33,15 @@ const trustStats = [
   { icon: Award, value: "24/7", label: "Expert Support" },
 ];
 
+const STATIC_PLANS = [
+  { id: "rdp-4", name: "RDP Starter", type: "RDP", os: "Windows Server 2022", ram: 4, cpu: 2, storage: 100, monthlyCost: 299, features: ["Full GUI Remote Desktop", "Admin Access", "4GB RAM", "2 vCPU", "100GB SSD", "Speed Up to 4 Gbps"], popular: false },
+  { id: "rdp-8", name: "RDP Pro", type: "RDP", os: "Windows Server 2022", ram: 8, cpu: 4, storage: 200, monthlyCost: 599, features: ["Full GUI Remote Desktop", "Admin Access", "8GB RAM", "4 vCPU", "200GB SSD", "Speed Up to 4 Gbps", "Daily Backups"], popular: true },
+  { id: "rdp-16", name: "RDP Business", type: "RDP", os: "Windows Server 2022", ram: 16, cpu: 8, storage: 320, monthlyCost: 1199, features: ["Full GUI Remote Desktop", "Admin Access", "16GB RAM", "8 vCPU", "320GB SSD", "Speed Up to 4 Gbps", "Daily Backups", "Priority Support"], popular: false },
+  { id: "vps-4", name: "VPS Starter", type: "VPS", os: "Ubuntu 22.04 LTS", ram: 4, cpu: 2, storage: 80, monthlyCost: 249, features: ["Root SSH Access", "Ubuntu 22.04", "4GB RAM", "2 vCPU", "80GB SSD", "Speed Up to 4 Gbps"], popular: false },
+  { id: "vps-8", name: "VPS Pro", type: "VPS", os: "Ubuntu 22.04 LTS", ram: 8, cpu: 4, storage: 160, monthlyCost: 499, features: ["Root SSH Access", "Ubuntu 22.04", "8GB RAM", "4 vCPU", "160GB SSD", "Speed Up to 4 Gbps", "Daily Backups"], popular: true },
+  { id: "vps-16", name: "VPS Business", type: "VPS", os: "Ubuntu 22.04 LTS", ram: 16, cpu: 6, storage: 320, monthlyCost: 999, features: ["Root SSH Access", "Ubuntu 22.04", "16GB RAM", "6 vCPU", "320GB SSD", "Speed Up to 4 Gbps", "Daily Backups", "Priority Support"], popular: false },
+];
+
 function StarRating({ count }: { count: number }) {
   return (
     <div className="flex gap-0.5">
@@ -100,7 +109,8 @@ function PricingCard({ plan, isPopular }: { plan: { id: string; name: string; ty
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"RDP" | "VPS">("RDP");
-  const { data: plans = [] } = useListPlans();
+  const { data: apiPlans = [] } = useListPlans();
+  const plans = apiPlans.length > 0 ? apiPlans : STATIC_PLANS;
   const filteredPlans = plans.filter((p) => p.type === activeTab);
 
   return (
@@ -358,4 +368,4 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+}                                                                                              }}
