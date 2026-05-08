@@ -7,15 +7,14 @@
       "config": { "distDir": "dist" }
     },
     {
-      "src": "backend/package.json",
-      "use": "@vercel/node",
-      "config": { "maxLambdaSize": "50mb" }
+      "src": "backend/src/index.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/package.json"
+      "src": "/api(.*)",
+      "dest": "backend/src/index.ts"
     },
     {
       "src": "/(.*)",
