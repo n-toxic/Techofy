@@ -2,18 +2,18 @@ import nodemailer from "nodemailer";
 import { logger } from "./logger";
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: Number(process.env.SMTP_PORT || 587),
   secure: false,
   auth: {
-    user: "toxic.bots.hub@gmail.com",
-    pass: "ggnt epny yvcg mzfq",
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
 
-const FROM = `"Techofy Cloud" <toxic.bots.hub@gmail.com>`;
+const FROM = `"Techofy Cloud" <${process.env.SMTP_USER}>`;
 const BRAND_COLOR = "#2563EB";
-const SITE_URL = "https://edev.fun";
+const SITE_URL = process.env.SITE_URL || "https://edev.fun";
 
 function emailTemplate(title: string, greeting: string, body: string): string {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
