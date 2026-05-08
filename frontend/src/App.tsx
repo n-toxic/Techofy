@@ -31,7 +31,7 @@ import AdminLogin from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 
 try {
-  setBaseUrl("https://e-dev.fun");
+  setBaseUrl("https://asp-production-0d63.up.railway.app");
   
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
 } catch (error) {}
