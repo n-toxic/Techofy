@@ -4,7 +4,9 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "shared/*"
+    "shared/db",
+    "shared/api-zod",
+    "shared/api-client"
   ],
   "scripts": {
     "install:all": "npm install --legacy-peer-deps",
