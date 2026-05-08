@@ -30,12 +30,11 @@ import AdminTickets from "@/pages/admin/tickets";
 import NotFound from "@/pages/not-found";
 
 try {
-  // Set backend API URL - set VITE_API_URL in Vercel environment variables
-  if (import.meta.env.VITE_API_URL) {
-    setBaseUrl(import.meta.env.VITE_API_URL);
-  }
+  setBaseUrl("https://e-dev.fun");
+  
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
-} catch {}
+} catch (error) {}
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
