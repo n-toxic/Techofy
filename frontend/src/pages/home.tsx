@@ -362,10 +362,10 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-border pt-6 text-center text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Techofy Cloud. All rights reserved.
+          &copy; {new Date().getFullYear()} Techofy Cloud. All rights reserved.
           </div>
         </div>
       </footer>
     </div>
   );
-}                                                                                              }}
+}
