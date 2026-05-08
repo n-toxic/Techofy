@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 
 app.set("trust proxy", 1);
 
-app.use("/api", router);
+app.use("/api", routes);
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   logger.error(err);
