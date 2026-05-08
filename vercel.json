@@ -1,24 +1,14 @@
 {
   "version": 2,
   "public": true,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://e-fev.fun/api/$1"
+      "destination": "https://e-dev.fun/api/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/frontend/index.html"
+      "destination": "/index.html"
     }
   ]
 }
