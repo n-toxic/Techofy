@@ -1,7 +1,6 @@
 import pino from "pino";
 
-// pino-pretty is NOT used on Vercel — it crashes serverless functions.
-// Use plain pino (JSON logs) in all environments.
+// pino-pretty removed — crashes on Vercel serverless
 export const logger = pino({
   level: "info",
   redact: [
