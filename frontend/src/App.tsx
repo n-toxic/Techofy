@@ -30,7 +30,7 @@ import AdminTickets from "@/pages/admin/tickets";
 import NotFound from "@/pages/not-found";
 
 try {
-  setBaseUrl("https://backend-backend-three.vercel.app/");
+  setBaseUrl("https://www.edev.fun/api");
   
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
 } catch (error) {}
