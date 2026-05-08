@@ -1,6 +1,6 @@
-import app from "./app";
+import app from "./app.js";
 
-// Local dev only
+// Local development ke liye
 if (process.env.NODE_ENV !== "production") {
   const port = process.env.PORT || 5000;
   app.listen(port, () => {
