@@ -12,23 +12,12 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
-// CORS - allow vercel.app, edev.fun, and localhost
+// Allow all origins - frontend & backend are on same Vercel project (experimentalServices)
 app.use(cors({
-  origin: (origin, callback) => {
-    if (
-      !origin ||
-      origin.endsWith(".vercel.app") ||
-      origin.endsWith("edev.fun") ||
-      origin.includes("localhost") ||
-      origin.includes("127.0.0.1")
-    ) {
-      callback(null, true);
-    } else {
-      callback(null, false);
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 }));
 
 app.use(pinoHttp({
