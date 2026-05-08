@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 function getJwtSecret(): string {
-  const secret = "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6";
+  const secret = process.env.JWT_SECRET || "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6";
   
   if (!secret || secret.length < 32) {
     throw new Error("JWT_SECRET is required and must be at least 32 characters");
