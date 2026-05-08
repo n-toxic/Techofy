@@ -4,7 +4,8 @@ import * as schema from "./schema";
 
 const { Pool } = pg;
 
-const connectionString = "postgresql://neondb_owner:npg_nHRXNL0bzoQ1@ep-little-flower-apyhb8d6-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require";
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) throw new Error("DATABASE_URL environment variable is not set");
 
 export const pool = new Pool({ connectionString });
 export const db = drizzle(pool, { schema });
