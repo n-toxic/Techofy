@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 const FROM = `"Techofy Cloud" <toxic.bots.hub@gmail.com>`;
 const BRAND_COLOR = "#2563EB";
-const SITE_URL = process.env.SITE_URL ?? "https://cloud.edev.fun";
+const SITE_URL = "https://edev.fun";
 
 function emailTemplate(title: string, greeting: string, body: string): string {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
