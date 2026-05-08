@@ -1,7 +1,7 @@
 import pino from "pino";
 
-const isDev = true; 
-
+// pino-pretty is NOT used on Vercel — it crashes serverless functions.
+// Use plain pino (JSON logs) in all environments.
 export const logger = pino({
   level: "info",
   redact: [
@@ -9,12 +9,4 @@ export const logger = pino({
     "req.headers.cookie",
     "res.headers['set-cookie']",
   ],
-  ...(isDev
-    ? {
-        transport: {
-          target: "pino-pretty",
-          options: { colorize: true },
-        },
-      }
-    : {}),
 });
