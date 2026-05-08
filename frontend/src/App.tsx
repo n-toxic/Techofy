@@ -30,7 +30,7 @@ import AdminTickets from "@/pages/admin/tickets";
 import NotFound from "@/pages/not-found";
 
 try {
-  setBaseUrl("https://www.edev.fun");
+  setBaseUrl("https://www.edev.fun/api");
   
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
 } catch (error) {}
