@@ -1,11 +1,10 @@
 import React from "react";
-import React from "react";
 import { Switch, Route, Router as WouterRouter, useLocation, Redirect } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth";
-import { setAuthTokenGetter } from "@workspace/api-client-react";
+import { setAuthTokenGetter, setBaseUrl } from "@workspace/api-client-react";
 
 import Home from "@/pages/home";
 import About from "@/pages/about";
@@ -29,9 +28,12 @@ import AdminInstances from "@/pages/admin/instances";
 import AdminServerPool from "@/pages/admin/server-pool";
 import AdminTickets from "@/pages/admin/tickets";
 import NotFound from "@/pages/not-found";
-import AdminLogin from "@/pages/admin-login";
 
 try {
+  // Set backend API URL - set VITE_API_URL in Vercel environment variables
+  if (import.meta.env.VITE_API_URL) {
+    setBaseUrl(import.meta.env.VITE_API_URL);
+  }
   setAuthTokenGetter(() => localStorage.getItem("techofy_token"));
 } catch {}
 
@@ -128,7 +130,6 @@ function Router() {
         {() => <ProtectedRoute component={AdminTickets} adminOnly />}
       </Route>
 
-      <Route path="/admin-login" component={AdminLogin} />
       <Route component={NotFound} />
     </Switch>
   );
