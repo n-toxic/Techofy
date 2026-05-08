@@ -3,24 +3,21 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # 1. Sabhi package.json files copy karo (taaki caching achhi mile)
+COPY package.json ./
+COPY .npmrc ./
 COPY frontend/package.json ./frontend/
 COPY shared/api-client/package.json ./shared/api-client/
 COPY shared/api-zod/package.json ./shared/api-zod/
 COPY shared/db/package.json ./shared/db/
 
-# 2. Shared dependencies install karo
-RUN cd shared/api-client && npm install
-RUN cd shared/api-zod && npm install
-RUN cd shared/db && npm install
+# 2. Root se ek baar install karo (npm deduplicate karega properly)
+RUN npm install --legacy-peer-deps
 
-# 3. Frontend dependencies install karo
-RUN cd frontend && npm install --legacy-peer-deps
-
-# 4. Ab saara source code copy karo
+# 3. Ab saara source code copy karo
 COPY shared/ ./shared/
 COPY frontend/ ./frontend/
 
-# 5. Build frontend
+# 4. Build frontend
 RUN cd frontend && npm run build
 
 # --- Production Stage (Nginx) ---
