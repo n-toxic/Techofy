@@ -128,6 +128,13 @@ function Router() {
       <Route path="/admin/tickets">
         {() => <ProtectedRoute component={AdminTickets} adminOnly />}
       </Route>
+      <Route path="/admin-login">
+      {() => <AdminLogin />}
+      </Route>
+
+      <Route path="/admin/tickets">
+      {() => <ProtectedRoute component={AdminTickets} adminOnly />}
+      </Route>
 
       <Route component={NotFound} />
     </Switch>
