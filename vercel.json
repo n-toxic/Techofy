@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "backend/src/index.ts",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["shared/**"] }
-    }
-  ],
+  "public": true,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "backend/src/index.ts" },
-    { "source": "/(.*)", "destination": "backend/src/index.ts" }
+    {
+      "source": "/api/(.*)",
+      "destination": "https://backend-backend-three.vercel.app/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
