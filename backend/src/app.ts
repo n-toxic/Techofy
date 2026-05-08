@@ -12,7 +12,6 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
-// Allow all origins - frontend & backend are on same Vercel project (experimentalServices)
 app.use(cors({
   origin: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
