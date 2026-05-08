@@ -31,7 +31,14 @@ export default function Login() {
         const dest = redirect && redirect.startsWith("/") ? redirect : (data.user.role === "ADMIN" ? "/admin" : "/dashboard");
         setLocation(dest);
       },
-      onError: (err: { data?: { error?: string }; message?: string }) => {
+      onError: (err: { data?: { error?: string; requiresVerification?: boolean; email?: string }; message?: string; status?: number }) => {
+        // If account not verified, redirect to OTP page
+        if (err?.data?.requiresVerification || err?.status === 403) {
+          const email = err?.data?.email ?? form.getValues("email");
+          toast({ title: "Verify your email", description: "A new OTP has been sent to your email." });
+          setLocation(`/verify-otp?email=${encodeURIComponent(email)}`);
+          return;
+        }
         toast({ title: "Login failed", description: err?.data?.error ?? err?.message ?? "Invalid credentials", variant: "destructive" });
       },
     },
